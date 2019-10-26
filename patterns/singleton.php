@@ -5,6 +5,8 @@ class Preferences {
 
 	private function __construct() {}
 
+	private function clone() {}
+
 	public static function getInstance() {
 		if (empty(self::$instance)) {
 			self::$instance = new Preferences();

@@ -1,6 +1,4 @@
 <?php
-//工厂模式
-
 /**
  * Class AppEncoder
  * 编码器
@@ -25,58 +23,41 @@ class MegaAppEncoder extends AppEncoder {
     }
 }
 
-abstract class CommsManager {
-    abstract function getHeaderText();
-    abstract function getAppEncoder();
-    abstract function getFooterText();
-}
+class CommsManger {
+    const BLOGGS = 1;
+    const MEGA = 2;
+    private $mode = 1;
 
-class BloggsCommsManager extends CommsManager {
-    function getHeaderText()
+    function __construct($mode)
     {
-        // TODO: Implement getHeaderText() method.
-        return "BloggsCal header\n";
+        $this->mode = $mode;
     }
 
-    function getAppEncoder()
-    {
-        // TODO: Implement getAppEncoder() method.
-        return new BloggsAppEncoder();
+    function getHeadText() {
+        switch ($this->mode) {
+            case self::BLOGGS:
+                return "BloggsCal header\n";
+                break;
+            default:
+                return "MegaCal header\n";
+                break;
+        }
     }
 
-    function getFooterText()
-    {
-        // TODO: Implement getFooterText() method.
-        return "BloggsCal footer\n";
-    }
-}
-
-class MegaCommsManager extends CommsManager {
-    function getHeaderText()
-    {
-        // TODO: Implement getHeaderText() method.
-        return "MegaCal header\n";
-    }
-
-    function getAppEncoder()
-    {
-        // TODO: Implement getAppEncoder() method.
-        return new MegaAppEncoder();
-    }
-
-    function getFooterText()
-    {
-        // TODO: Implement getFooterText() method.
-        return "MegaCal footer\n";
+    function getApptEncoder() {
+        switch ($this->mode) {
+            case self::BLOGGS:
+                return new MegaAppEncoder();
+                break;
+            default:
+                return new BloggsAppEncoder();
+                break;
+        }
     }
 }
 
-$bloggsObj = new BloggsCommsManager();
-$msg = $bloggsObj->getAppEncoder()->encode();
-echo $msg;
-
-$megaObj = new MegaCommsManager();
-$msg = $megaObj->getAppEncoder()->encode();
-echo $msg;
-
-
+$comms = new CommsManger(CommsManger::MEGA);
+$apptHeader = $comms->getHeadText();
+print_r($apptHeader);
+$apptEncoder = $comms->getApptEncoder();
+print_r($apptEncoder->encode());

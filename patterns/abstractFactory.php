@@ -69,6 +69,7 @@ class BloggsCommsManager extends CommsManager {
                 return new BloggsContactEncoder();
                 break;
             default:
+                return false;
                 break;
         }
     }
@@ -81,7 +82,7 @@ class BloggsCommsManager extends CommsManager {
 }
 
 $bloggsObj = new BloggsCommsManager();
-$msg = $bloggsObj->getAppEncoder()->encode();
+$msg = $bloggsObj->make($bloggsObj::TTD)->encode();
 echo $msg;
 
 
