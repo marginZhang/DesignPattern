@@ -36,10 +36,10 @@ class CommsManger {
     function getApptEncoder() {
         switch ($this->mode) {
             case self::BLOGGS:
-                return new MegaAppEncoder();
+                return new BloggsAppEncoder();
                 break;
             default:
-                return new BloggsAppEncoder();
+                return new MegaAppEncoder();
                 break;
         }
     }
