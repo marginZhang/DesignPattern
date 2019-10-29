@@ -5,25 +5,39 @@
  * Class AppEncoder
  * 编码器
  */
-abstract class AppEncoder {
+abstract class ApptEncoder {
+    abstract function encode();
+}
+/**
+ * Class AppEncoder
+ * 编码器
+ */
+abstract class TtdEncoder {
+    abstract function encode();
+}
+/**
+ * Class AppEncoder
+ * 编码器
+ */
+abstract class ContactEncoder {
     abstract function encode();
 }
 
 /**
  * bloggs格式
- * Class BloggsAppEncoder
+ * Class ApptEncoder
  */
-class BloggsAppEncoder extends AppEncoder {
+class BloggsApptEncoder extends ApptEncoder {
     function encode() {
-        return "Appointment data encode in BloggsAppEncoder\n";
+        return "Appointment data encode in BloggsApptEncoder\n";
     }
 }
 
 /**
  * bloggs格式
- * Class BloggsAppEncoder
+ * Class TtdEncoder
  */
-class BloggsTtdEncoder extends AppEncoder {
+class BloggsTtdEncoder extends TtdEncoder {
     function encode() {
         return "Appointment data encode in BloggsTtdEncoder\n";
     }
@@ -31,9 +45,9 @@ class BloggsTtdEncoder extends AppEncoder {
 
 /**
  * bloggs格式
- * Class BloggsAppEncoder
+ * Class ContactEncoder
  */
-class BloggsContactEncoder extends AppEncoder {
+class BloggsContactEncoder extends ContactEncoder {
     function encode() {
         return "Appointment data encode in BloggsContactEncoder\n";
     }
@@ -60,7 +74,7 @@ class BloggsCommsManager extends CommsManager {
         // TODO: Implement getAppEncoder() method.
         switch ($flagInt) {
             case self::APPT:
-                return new BloggsAppEncoder();
+                return new BloggsApptEncoder();
                 break;
             case self::TTD:
                 return new BloggsTtdEncoder();
